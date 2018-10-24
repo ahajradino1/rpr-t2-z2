@@ -92,3 +92,10 @@ class IntervalTest {
         assertEquals("(2.2,2.5)", i3.toString());
     }
 }
+
+
+
+
+
+
+
