@@ -43,26 +43,24 @@ public class Interval {
     }
     public Interval intersect(Interval i) {
         if(this.equals(i)) return this;
-        Interval presjek = new Interval();
-        if(krajnjaTacka < i.pocetnaTacka && pocetnaTacka < i.krajnjaTacka) return new Interval();
+        if(this.krajnjaTacka < i.pocetnaTacka && this.krajnjaTacka < i.krajnjaTacka) return new Interval();
         double min, max;
-        if(pocetnaTacka > i.pocetnaTacka) {
-            max = pocetnaTacka;
-            presjek.pocetnaPripadaIntervalu = pocetnaPripadaIntervalu;
+        boolean pripadaPoc, pripadaKraj;
+        if(this.pocetnaTacka > i.pocetnaTacka) {
+            max = this.pocetnaTacka;
+            pripadaPoc = this.pocetnaPripadaIntervalu;
         } else {
             max = i.pocetnaTacka;
-            presjek.pocetnaPripadaIntervalu = i.pocetnaPripadaIntervalu;
+            pripadaPoc = i.pocetnaPripadaIntervalu;
         }
-        if(krajnjaTacka < i.krajnjaTacka) {
-            min = krajnjaTacka;
-            presjek.krajnjaPripadaIntervalu = i.krajnjaPripadaIntervalu;
+        if(this.krajnjaTacka < i.krajnjaTacka) {
+            min = this.krajnjaTacka;
+            pripadaKraj = this.krajnjaPripadaIntervalu;
         } else {
             min = i.krajnjaTacka;
-            presjek.krajnjaPripadaIntervalu = i.krajnjaPripadaIntervalu;
+            pripadaKraj = i.krajnjaPripadaIntervalu;
         }
-        presjek.pocetnaTacka = max;
-        presjek.krajnjaTacka = min;
-        return presjek;
+        return new Interval(max, min, pripadaPoc, pripadaKraj);
     }
     public static Interval intersect(Interval i1, Interval i2) {
         if(i1.equals(i2)) return i1;
@@ -85,7 +83,7 @@ public class Interval {
         }
         return new Interval(max, min, pripadaPoc, pripadaKraj);
     }
-    boolean equals(Interval i) {
+    public boolean equals(Interval i) {
         return pocetnaTacka == i.pocetnaTacka && krajnjaTacka == i.krajnjaTacka && pocetnaPripadaIntervalu == i.pocetnaPripadaIntervalu && krajnjaPripadaIntervalu == i.krajnjaPripadaIntervalu;
     }
 }
